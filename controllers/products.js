@@ -4,6 +4,7 @@ const {products} = require('../data/data1')
 const userModel = require('../models/userModel')
 const productsModel = require('../models/productsModel')
 const {BadRequestError, NotFoundError} = require('../errors')
+const { StatusCodes } = require('http-status-codes')
 
 // GET ALL
 const get_all = async(req, res)=>{
@@ -55,7 +56,7 @@ const deleteItem = async (req, res)=>{
         // res.send('id and id of Product is required')
     }
     const deletedItem = await productsModel.findByIdAndDelete({_id: productId, createdBy: userId})
-    res.send(deletedItem)
+    res.status(204).json(deletedItem)
 }
 
 module.exports = {
