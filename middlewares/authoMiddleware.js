@@ -20,4 +20,4 @@ const auth = (req, res, next)=>{
     
 }
 
-module.exports = authAUTHOMIDDLEWARE
+module.exports = auth
