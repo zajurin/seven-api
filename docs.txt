@@ -1,0 +1,323 @@
+openapi: 3.1.0
+info:
+  title: Api Seven
+  contact: {}
+  version: '1.0'
+jsonSchemaDialect: https://json-schema.org/draft/2020-12/schema
+servers:
+  - url: https://seven-api.onrender.com/api/v1
+    variables: {}
+paths:
+  /products:
+    get:
+      tags:
+        - Products
+      summary: Get All products
+      description: GET ALL the products related to the logged in user
+      operationId: GetAllproducts
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+    post:
+      tags:
+        - Products
+      summary: Create product
+      operationId: Createproduct
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/CreateproductRequest'
+                - examples:
+                    - name: Your first Node API 5
+                      description: Learn how to create your first Node API
+                      price: 19.54
+                      category: info products
+              contentMediaType: application/json
+            example:
+              name: Your first Node API 5
+              description: Learn how to create your first Node API
+              price: 19.54
+              category: info products
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+    parameters: []
+  /products/63cdaf2c15d05d8bee69b95d:
+    get:
+      tags:
+        - Products
+      summary: Get One product
+      operationId: GetOneproduct
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+    patch:
+      tags:
+        - Products
+      summary: UPDATE product
+      description: >-
+        Patch will update any change in any of the following values:
+
+
+        StartFragment
+
+
+        ``` json
+
+        {    
+
+        "name":"Your first Node API",
+
+        "description":"Learn how to create your first Node API",    
+
+        "price": 19.54,    
+
+        "category": "info products"
+
+        }
+
+
+        ```
+
+
+        `Note:` _"category": "info products"_
+
+
+        Is a property that allows you to define a list of valid values for a
+        field in a document. By specifying an option list for a field, Mongoose
+        can validate that the value assigned to that field is one of the values
+        in the list. This helps ensure data integrity and prevents errors. The
+        options are:
+
+
+        _'__**info products**__', 'electronics', 'health', 'software', 'others'_
+
+
+        The option in **bold letters** is the default option.
+
+
+        Next values are filled automatically by Mongoose.
+
+
+        ``` json
+
+        {
+
+        "createdBy": "63cb7bc66a644ee4d3d1dc30",    
+
+        "createdAt":"2023-01-22T21:48:28.412+00:00",    
+
+        "updatedAt":"2023-01-29T04:09:32.617+00:00"
+
+        }
+
+
+        ```
+
+
+        _createdBy_ : Is the user's id that created the document
+
+
+        _createdAt_ : Is the Date that answers the question: When the document
+        was created?
+
+
+        _updatedAt_ : If there Is any update on the document, this sectrion will
+        show when did it happen
+      operationId: UPDATEproduct
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/UPDATEproductRequest'
+                - examples:
+                    - name: Your first Node API
+                      description: Learn how to create your first Node API
+                      price: 19.54
+                      category: info products
+              contentMediaType: application/json
+            example:
+              name: Your first Node API
+              description: Learn how to create your first Node API
+              price: 19.54
+              category: info products
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+    delete:
+      tags:
+        - Products
+      summary: DELETE product
+      operationId: DELETEproduct
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+    parameters: []
+  /auth/register:
+    post:
+      tags:
+        - Auth
+      summary: Register User
+      operationId: RegisterUser
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/RegisterUserRequest'
+                - examples:
+                    - username: newUser
+                      password: myPassword
+              contentMediaType: application/json
+            example:
+              username: newUser
+              password: myPassword
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+    parameters: []
+  /auth/login:
+    post:
+      tags:
+        - Auth
+      summary: Login User
+      operationId: LoginUser
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/LoginUserRequest'
+                - examples:
+                    - username: johnDoe
+                      password: mySecretPassword
+              contentMediaType: application/json
+            example:
+              username: johnDoe
+              password: mySecretPassword
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+    parameters: []
+components:
+  schemas:
+    RegisterUserRequest:
+      title: RegisterUserRequest
+      required:
+        - username
+        - password
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+      examples:
+        - username: newUser
+          password: myPassword
+    LoginUserRequest:
+      title: LoginUserRequest
+      required:
+        - username
+        - password
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+      examples:
+        - username: johnDoe
+          password: mySecretPassword
+    UPDATEproductRequest:
+      title: UPDATEproductRequest
+      required:
+        - name
+        - description
+        - price
+        - category
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        price:
+          type: number
+        category:
+          type: string
+      examples:
+        - name: Your first Node API
+          description: Learn how to create your first Node API
+          price: 19.54
+          category: info products
+    CreateproductRequest:
+      title: CreateproductRequest
+      required:
+        - name
+        - description
+        - price
+        - category
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        price:
+          type: number
+        category:
+          type: string
+      examples:
+        - name: Your first Node API 5
+          description: Learn how to create your first Node API
+          price: 19.54
+          category: info products
+  securitySchemes:
+    bearer:
+      type: http
+      scheme: bearer
+security: []
+tags:
+  - name: Misc
+    description: ''
+  - name: Products
+    description: ''
+  - name: Auth
+    description: ''
