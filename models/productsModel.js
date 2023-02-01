@@ -10,7 +10,7 @@ const ProducstModel = new mongoose.Schema({
         required:[true, 'Please write a brief description']
     },
     price:{
-        type: Double,
+        type: Number,
         required:[true, 'Please let customer knows the price of your item']
     },
     category:{
